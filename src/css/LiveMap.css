@@ -1,0 +1,24 @@
+#map {
+    width: 100vw;
+    height: 80vh;
+}
+
+.student,
+.driver {
+    position: absolute;
+    background-size: cover;
+    top: -14px;
+    cursor: pointer;
+}
+
+.student {
+    background-image: url('mapbox-icon.png');
+    width: 30px;
+    height: 30px;
+}
+
+.driver {
+    background-image: url('bus-marker.png');
+    width: 25px;
+    height: 35px;
+}
