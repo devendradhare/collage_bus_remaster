@@ -49,11 +49,11 @@ export default function Navbar() {
         </li>
         <li
           onClick={() => {
-            Activate_on_click("services");
+            Activate_on_click("live_map");
           }}
         >
-          <Link to="/services" className={Is_link_active["services"]}>
-            Services
+          <Link to="/live_map" className={Is_link_active["live_map"]}>
+            Map
           </Link>
         </li>
         <li

@@ -1,21 +1,87 @@
-import React from "react";
+import React, { useRef, useEffect, useState } from "react";
+import mapboxgl from "!mapbox-gl"; // eslint-disable-line import/no-webpack-loader-syntax
+import "mapbox-gl/dist/mapbox-gl.css"; // Import Mapbox CSS
+
+// mapbox token ID
+mapboxgl.accessToken =
+  "pk.eyJ1IjoiY29kZW5kcmFtIiwiYSI6ImNsa2doOTdsdDAwNzQzZ3J6NW1ya3FhOHgifQ.SHXHy-5AQEdp3i5P08iBuw";
 
 export default function LiveMap() {
+  const mapContainer = useRef(null);
+  const map = useRef(null);
+  const [lng, setLng] = useState(77.3988);
+  const [lat, setLat] = useState(23.2559);
+  const [zoom, setZoom] = useState(7);
+  const [userLocation, setUserLocation] = useState(null);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      navigator.geolocation.watchPosition(position => {
+        const { longitude, latitude } = position.coords;
+        setLng(longitude);
+        setLat(latitude);
+        setUserLocation({ lng: longitude, lat: latitude });
+        console.log("first useEffect", longitude, latitude);
+        // Update the map's center
+        // if (map.current) {
+        //   map.current.setCenter([longitude, latitude]);
+        // }
+      });
+    }, 2000);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (map.current) return; // initialize map only once
+    map.current = new mapboxgl.Map(
+      {
+        container: mapContainer.current,
+        style: "mapbox://styles/mapbox/streets-v12",
+        center: [lng, lat],
+        zoom: zoom
+      },
+      [lng, lat]
+    );
+
+    // go to your location button
+    map.current.addControl(
+      new mapboxgl.GeolocateControl({
+        positionOptions: {
+          enableHighAccuracy: true
+        },
+        trackUserLocation: true,
+        showUserHeading: true
+      })
+    );
+  }, []);
+
+  // useEffect(() => {
+  //   if (!map.current) return; // wait for map to initialize
+  //   map.current.on("move", () => {
+  //   setLng(map.current.getCenter().lng.toFixed(4));
+  //   setLat(map.current.getCenter().lat.toFixed(4));
+  //   setZoom(map.current.getZoom().toFixed(2));
+  // });
+
   return (
-    <>
-      <h3>map start</h3>
-      <div id="map" />
-      <h3>map end</h3>
-    </>
+    <div>
+      <div className="sidebar">
+        Longitude: {lng} | Latitude: {lat} | Zoom: {zoom}
+      </div>
+      <div ref={mapContainer} className="map-container" />
+    </div>
   );
 }
 
 // const dotenv = require('dotenv').config();
-// MapBox api key
-// mapboxgl.accessToken =
-//   'pk.eyJ1IjoiY29kZW5kcmFtIiwiYSI6ImNsa2doOTdsdDAwNzQzZ3J6NW1ya3FhOHgifQ.SHXHy-5AQEdp3i5P08iBuw';
+// ✅MapBox api key
+// ✅mapboxgl.accessToken =
+// ✅ 'pk.eyJ1IjoiY29kZW5kcmFtIiwiYSI6ImNsa2doOTdsdDAwNzQzZ3J6NW1ya3FhOHgifQ.SHXHy-5AQEdp3i5P08iBuw';
 
-// console.log("hello world");
+// ✅console.log("hello world");
 // // console.log(process.env);
 // var socket = io();                                        // setup my socket client
 // let user_count = 0;                                       // connected users
@@ -24,11 +90,11 @@ export default function LiveMap() {
 // let userid = Math.random().toString(36).substring(2, 7);  // program to generate random strings
 // let cookie_data = document.cookie.split("dvn")[1].split("split");
 
-// var map = new mapboxgl.Map({                              // setting up MapBoxe
-//   container: 'map', style: 'mapbox://styles/mapbox/streets-v11',
-//   center: [77.39889912939028, 23.25604944351329],         // it will sets the camera of the map above bhopal
-//   zoom: 11, // minZoom: 10
-// });
+// ✅var map = new mapboxgl.Map({                              // setting up MapBoxe
+// ✅  container: 'map', style: 'mapbox://styles/mapbox/streets-v11',
+// ✅  center: [77.39889912939028, 23.25604944351329],         // it will sets the camera of the map above bhopal
+// ✅  zoom: 11, // minZoom: 10
+// ✅});
 
 // var geolocate = new mapboxgl.GeolocateControl({           // getting currunt coordinates of the user
 //   positionOptions: { enableHighAccuracy: true },
