@@ -1,0 +1,26 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;     
+    text-decoration: none;
+    list-style: none;
+}
+
+:root {
+    /* --bg-color: #222327; */
+    --bg-color: rgba(36, 39, 45, 0.992);  
+    --text-color: #fff;
+    --main-color: #46ff6b;
+
+}
+
+body {
+    min-height: 100vh;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+/* #root{
+    margin-top: 15vh;
+} */

@@ -1,0 +1,42 @@
+#map {
+    width: 100vw;
+    height: 80vh;
+}
+
+.student,
+.driver {
+    position: absolute;
+    background-size: cover;
+    top: -14px;
+    cursor: pointer;
+}
+
+.student {
+    background-image: url('mapbox-icon.png');
+    width: 30px;
+    height: 30px;
+}
+
+.driver {
+    background-image: url('bus-marker.png');
+    width: 25px;
+    height: 35px;
+}
+
+.marker {
+    background-image: url('mapbox-icon.png');
+    background-size: cover;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.mapboxgl-popup {
+    max-width: 200px;
+}
+
+.mapboxgl-popup-content {
+    text-align: center;
+    font-family: 'Open Sans', sans-serif;
+}
