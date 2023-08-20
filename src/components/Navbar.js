@@ -38,7 +38,7 @@ export default function Navbar() {
             Home
           </Link>
         </li>
-        <li
+        {/* <li
           onClick={() => {
             Activate_on_click("about");
           }}
@@ -46,7 +46,9 @@ export default function Navbar() {
           <Link to="/About" className={Is_link_active["about"]}>
             About Us
           </Link>
-        </li>
+        </li> */}
+
+
         <li
           onClick={() => {
             Activate_on_click("live_map");
@@ -56,7 +58,8 @@ export default function Navbar() {
             Map
           </Link>
         </li>
-        <li
+
+        {/* <li
           onClick={() => {
             Activate_on_click("blog");
           }}
@@ -64,8 +67,10 @@ export default function Navbar() {
           <Link to="/" className={Is_link_active["blog"]}>
             Blogs
           </Link>
-        </li>
-        <li
+        </li> */}
+
+
+        {/* <li
           onClick={() => {
             Activate_on_click("contact");
           }}
@@ -73,7 +78,8 @@ export default function Navbar() {
           <Link to="/" className={Is_link_active["contact"]}>
             Contect
           </Link>
-        </li>
+        </li> */}
+        
       </ul>
 
       <div className="main">
