@@ -1,18 +1,16 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { useLocation } from 'react-router-dom';
+// import { useLocation } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
 import "../css/Navbar.css";
 
 export default function Navbar() {
+  const { loginWithRedirect, logout, isAuthenticated } = useAuth0();
   const [bx, setbx] = useState("bx bx-menu");
   const [navbar, setnavbar] = useState("navbar navbar_active");
-  const [Is_link_active, setIs_link_active] = useState({
-    home: "active"
-  });
-  const location = useLocation();
-  console.log(location.pathname);
-
+  const [Is_link_active, setIs_link_active] = useState({});
   const Activate_on_click = link_name => {
+    console.log(link_name);
     const new_obj = {};
     new_obj[link_name] = "active";
     setIs_link_active(new_obj);
@@ -34,11 +32,11 @@ export default function Navbar() {
             Activate_on_click("home");
           }}
         >
-          <Link to="/Home" className={Is_link_active.home}>
+          <Link to="/Home" className={Is_link_active["home"]}>
             Home
           </Link>
         </li>
-        {/* <li
+        <li
           onClick={() => {
             Activate_on_click("about");
           }}
@@ -46,8 +44,7 @@ export default function Navbar() {
           <Link to="/About" className={Is_link_active["about"]}>
             About Us
           </Link>
-        </li> */}
-
+        </li>
 
         <li
           onClick={() => {
@@ -59,18 +56,7 @@ export default function Navbar() {
           </Link>
         </li>
 
-        {/* <li
-          onClick={() => {
-            Activate_on_click("blog");
-          }}
-        >
-          <Link to="/" className={Is_link_active["blog"]}>
-            Blogs
-          </Link>
-        </li> */}
-
-
-        {/* <li
+        <li
           onClick={() => {
             Activate_on_click("contact");
           }}
@@ -78,15 +64,24 @@ export default function Navbar() {
           <Link to="/" className={Is_link_active["contact"]}>
             Contect
           </Link>
-        </li> */}
-        
+        </li>
       </ul>
 
       <div className="main">
-        <Link to="/login" className="user">
-          <i className="ri-user-3-fill" />LogIn
+        {isAuthenticated
+          ? <button
+              onClick={() =>
+                logout({ logoutParams: { returnTo: window.location.origin } })}
+            >
+              Log Out
+            </button>
+          : <button onClick={() => loginWithRedirect()}>Log In</button>}
+
+        {/* <Link to="/login" className="user">
+          <i className="ri-user-3-fill" />LogIn 
         </Link>
-        <Link to="/">Register</Link>
+        <Link to="/">Register</Link> */}
+
         <div className={bx} id="menu-icon" onClick={menu_icon_clicked} />
       </div>
     </header>

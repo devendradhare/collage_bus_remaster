@@ -1,6 +1,7 @@
 import React, { useRef, useEffect, useState } from "react";
 import mapboxgl from "!mapbox-gl"; // eslint-disable-line import/no-webpack-loader-syntax
 import "mapbox-gl/dist/mapbox-gl.css"; // Import Mapbox CSS
+import { useAuth0 } from "@auth0/auth0-react";
 
 
 // mapbox token ID
@@ -10,6 +11,10 @@ mapboxgl.accessToken =
 // const userid = socket.id;
 
 export default function LiveMap({web_socket:socket}) {
+  const { loginWithRedirect, isAuthenticated } = useAuth0();
+  if (!isAuthenticated) {
+    loginWithRedirect();
+  }
   // mapbox variabls
   const mapContainer = useRef(null);
   const map = useRef(null);

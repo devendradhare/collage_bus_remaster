@@ -1,5 +1,8 @@
+// hooks imoprts
 import React, { useRef, useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+// components imports
 import Navbar from "./components/Navbar";
 import Login from "./components/Login";
 import About from "./components/About";
@@ -19,7 +22,7 @@ function App() {
       <Navbar />
 
       <Routes>
-        <Route path="/" element={<h3>page is in production </h3>} />
+        <Route path="/" element={<Home />} />
         <Route path="/home" element={<Home />} />
         <Route path="/live_map" element={<LiveMap web_socket={socket}/>} />
         <Route path="/about" element={<About />} />
