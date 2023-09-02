@@ -2,13 +2,10 @@ import React, { useRef, useEffect, useState } from "react";
 import mapboxgl from "!mapbox-gl"; // eslint-disable-line import/no-webpack-loader-syntax
 import "mapbox-gl/dist/mapbox-gl.css"; // Import Mapbox CSS
 import { useAuth0 } from "@auth0/auth0-react";
-
+import routes from "./routes"; // Import bus route data
 
 // mapbox token ID
-mapboxgl.accessToken =
-  "pk.eyJ1IjoiY29kZW5kcmFtIiwiYSI6ImNsa2doOTdsdDAwNzQzZ3J6NW1ya3FhOHgifQ.SHXHy-5AQEdp3i5P08iBuw";
-// const userid = Math.random().toString(36).substring(2, 7); // program to generate random strings
-// const userid = socket.id;
+mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_TOKEN;
 
 export default function LiveMap({web_socket:socket}) {
   const { loginWithRedirect, isAuthenticated } = useAuth0();
@@ -21,10 +18,10 @@ export default function LiveMap({web_socket:socket}) {
   const [lng, setLng] = useState(77.3988);
   const [lat, setLat] = useState(23.2559);
   const [zoom, setZoom] = useState(7);
+
   // variabls and function for markers
   const [Marker_list, setMarker_list] = useState([]);
   const [markers, setMarkers] = useState([]);
-  // var markers = [];
 
   // Function to add a marker to the map
   const addMarkers = (lng, lat) => {
@@ -86,16 +83,44 @@ export default function LiveMap({web_socket:socket}) {
       center: [lng, lat],
       zoom: zoom
     });
+    // Loop through and add route sources and layers
+    for (const routeName in routes) {
+      if (routes.hasOwnProperty(routeName)) {
+        const routeData = routes[routeName];
+        const { coords, color } = routeData;
 
-    // go to your location button
-    map.current.addControl(
-      new mapboxgl.GeolocateControl({
-        positionOptions: { enableHighAccuracy: true },
-        trackUserLocation: true,
-        showUserHeading: true
-      })
-    );
-  });
+        map.current.on("load", () => {
+          map.current.addSource(routeName, {
+            type: "geojson",
+            data: {
+              type: "Feature",
+              properties: {},
+              geometry: {
+                type: "LineString",
+                coordinates: coords,
+              },
+            },
+          });
+
+          map.current.addLayer({
+            id: routeName,
+            type: "line",
+            source: routeName,
+            layout: {
+              "line-join": "round",
+              "line-cap": "round",
+            },
+            paint: {
+              "line-color": color,
+              "line-width": 3,
+              "line-opacity": 0.35,
+            },
+          });
+        });
+      }
+    }
+
+  }, []);
 
   useEffect(() => {
     const interval = setInterval(() => {

@@ -1,8 +1,14 @@
 const express = require("express");
 const app = express();
+
+const dotenv = require("dotenv");
+dotenv.config({ path: "./config.env" });
+
 const cors = require("cors");
 const http = require("http").Server(app);
-const PORT = 4000;
+const User = require("./User");
+
+const PORT = process.env.PORT || 4000;
 const socketIO = require("socket.io")(http, {
   cors: {
     origin: "http://localhost:3000"
@@ -11,6 +17,17 @@ const socketIO = require("socket.io")(http, {
 
 app.use(cors());
 var data = "this is temp data";
+
+// save user info in live_bus_db
+async function save_user_info(userInfo) {
+  try {
+    const user = new User(userInfo);
+    await user.save();
+    console.log("User saved to MongoDB:", user);
+  } catch (error) {
+    console.error("\x1b[31m", "Error saving user:", error.message, "\x1b[0m"); // showing error in red font
+  }
+}
 
 // database temp data
 var user_data = [];
@@ -38,6 +55,8 @@ function stop_sending_data() {
 
 function collect_users_data(new_coord) {
   if (new_coord.userid == undefined) return;
+
+  // inside new coord we have  { longitude, latitude, userid: socket.id }
   user_data.push(new_coord);
 
   // if (user_data.length === 0) {
@@ -56,6 +75,11 @@ socketIO.on("connection", socket => {
   socket.on("user_coords", data => {
     // console.log("data:", data);
     collect_users_data(data);
+  });
+
+  socket.on("user_info", user_info => {
+    console.log("socket.on ln 73: ", user_info);
+    save_user_info(user_info);
   });
 
   socket.on("disconnect", () => {

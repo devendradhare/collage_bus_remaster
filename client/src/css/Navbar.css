@@ -69,12 +69,13 @@ header {
 .user {
     display: flex;
     align-items: center;
+    margin-left: 3px;
 }
 
-/* .user i {
+.user i {
     color: var(--main-color);
-    margin-right: 7px;
-} */
+    margin-right: 10px;
+}
 
 #menu-icon {
     font-size: 35px;
@@ -100,7 +101,8 @@ header {
     #menu-icon {
         display: block;
     }
-    header{
+
+    header {
         padding: 0;
     }
 
@@ -140,9 +142,21 @@ header {
         color: var(--text-color);
     }
 
-    .main a{
+    .main a {
         margin: 0 5px;
         font-size: 10px;
+    }
+
+    .close_menu_active {
+        /* float: right; */
+        background: #00000033;
+        padding: 50vw;
+        padding-bottom: 200vh;
+        position: absolute;
+        top: 5px;
+    }
+    .close_menu_not_active {
+        padding: 0;
     }
 
     /* .navbar.open {
