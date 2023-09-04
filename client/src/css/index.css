@@ -12,20 +12,3 @@ code {
     monospace;
 }
 
-/* css for mapbox start  */
-.map-container {
-  height: 400px;
-}
-
-.sidebar {
-  background-color: rgba(35, 55, 75, 0.9);
-  color: #fff;
-  padding: 6px 12px;
-  font-family: monospace;
-  z-index: 1;
-  position: absolute;
-  margin: 1px 0 0 1px;
-  border-radius: 4px;
-}
-
-/* css for mapbox end  */

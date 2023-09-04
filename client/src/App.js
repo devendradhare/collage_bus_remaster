@@ -32,7 +32,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/home" element={<Home />} />
         <Route path="/live_map" element={<LiveMap web_socket={socket} />} />
-        <Route path="/about" element={<About />} />
+        <Route path="/about" element={<About web_socket={socket}/>} />
       </Routes>
     </BrowserRouter>
   );

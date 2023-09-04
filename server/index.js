@@ -32,9 +32,9 @@ async function save_user_info(userInfo) {
 // database temp data
 var user_data = [];
 let intervalId = null;
-// sending data every 2 seconds
-// mannageing users data
+const driverPassword = "dvn";
 
+// sending data in every 2 seconds and making the array empty
 function start_sending_data() {
   intervalId = setInterval(() => {
     process.stdout.write(".");
@@ -48,21 +48,19 @@ function start_sending_data() {
   }, 2000);
 }
 
+// stop sending data by clearing interval
 function stop_sending_data() {
   clearInterval(intervalId);
   intervalId = null;
 }
 
+// collecting all the user coordinates in an array
 function collect_users_data(new_coord) {
   if (new_coord.userid == undefined) return;
 
   // inside new coord we have  { longitude, latitude, userid: socket.id }
   user_data.push(new_coord);
 
-  // if (user_data.length === 0) {
-  //   console.log("stop_sending_data");
-  //   stop_sending_data();
-  // } else
   if (intervalId == null) {
     console.log("\nstart_sending_data");
     start_sending_data();
@@ -71,6 +69,7 @@ function collect_users_data(new_coord) {
 
 socketIO.on("connection", socket => {
   console.log(`⚡: ${socket.id} user just connected!`);
+  // socket.join(socket.id);
 
   socket.on("user_coords", data => {
     // console.log("data:", data);
@@ -81,6 +80,11 @@ socketIO.on("connection", socket => {
     console.log("socket.on ln 73: ", user_info);
     save_user_info(user_info);
   });
+
+  socket.on("checkDriverPass", data => {
+    // console.log(data.socketID, data.password);
+    socketIO.to(data.socketID).emit("isDriverPassTrue", data.password==driverPassword);
+  })
 
   socket.on("disconnect", () => {
     console.log("   🔥: A user disconnected");

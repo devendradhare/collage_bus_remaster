@@ -45,7 +45,7 @@ export default function Navbar() {
             }}
           >
             <Link to="/About" className={Is_link_active["about"]}>
-              About Us
+              About
             </Link>
           </li>
 
