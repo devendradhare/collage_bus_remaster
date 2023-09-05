@@ -25,3 +25,5 @@ yarn-error.log*
 # added by dvn
 *.env
 /AAA_delete_this_file
+# Local Netlify folder
+.netlify

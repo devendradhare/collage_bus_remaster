@@ -11,7 +11,8 @@ import LiveMap from "./components/LiveMap";
  
 // for socket connection
 import socketIO from "socket.io-client";
-const socket = socketIO.connect("http://localhost:4000");
+// const socket = socketIO.connect("http://localhost:4000");
+const socket = socketIO.connect("https://dvn-live-server.onrender.com");
 
 function App() {
   const { user, isAuthenticated, isLoading } = useAuth0();
