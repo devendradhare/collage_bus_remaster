@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import "../css/join_as_popup.css";
+import "../css/JoinAsPopup.css";
 
-const Join_as_popup = ({ socket, setJoinAs }) => {
+const JoinAsPopup = ({ socket, setJoinAs }) => {
   // const [Joined_as, setJoined_as] = useState("");
   const [Driver_pass, setDriver_pass] = useState("");
   const [IfPassWrong, setIfPassWrong] = useState("Enter your password");
@@ -32,7 +32,7 @@ const Join_as_popup = ({ socket, setJoinAs }) => {
         setIfPassWrong("Wrong password");
       }
     });
-  }, []);
+  }, [setJoinAs, socket]);
 
   return (
     <div className="join_as_box">
@@ -58,4 +58,4 @@ const Join_as_popup = ({ socket, setJoinAs }) => {
   );
 };
 
-export default Join_as_popup;
+export default JoinAsPopup;

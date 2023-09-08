@@ -7,9 +7,9 @@
 /* css for mapbox start  */
 .map-container {
     height: 93vh;
-  }
-  
-  .sidebar {
+}
+
+.sidebar {
     background-color: rgba(35, 55, 75, 0.9);
     color: #fff;
     padding: 6px 12px;
@@ -18,9 +18,9 @@
     position: absolute;
     margin: 1px 0 0 1px;
     border-radius: 4px;
-  }
-  
-  /* css for mapbox end  */
+}
+
+/* css for mapbox end  */
 
 .student,
 .driver {
@@ -38,6 +38,7 @@
 
 .driver {
     background-image: url('bus-marker.png');
+    /* background-image: linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,0.7)), url("bus-marker.png"); */
     width: 25px;
     height: 35px;
 }
