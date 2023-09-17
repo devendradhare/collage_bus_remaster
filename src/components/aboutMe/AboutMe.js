@@ -18,8 +18,8 @@ export default function AboutMe() {
       minHeight={"calc(100vh - 175px)"}
     >
       <Box
-        className={classNames(Style.avatar)}
-        //   className={classNames(Style.avatar, Style.shadowed)}
+        // className={classNames(Style.avatar)}
+          className={classNames(Style.avatar, Style.shadowed)}
         alt={"image of developer"}
         //   style={{ background: info.gradient }}
         component={"img"}
@@ -33,9 +33,10 @@ export default function AboutMe() {
       />
       <Box>
         <h1>
-          Hi, I'm{" "}
+          Hi, I'm
           <span
             style={{
+              marginLeft: "7px",
               background: info.gradient,
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent"

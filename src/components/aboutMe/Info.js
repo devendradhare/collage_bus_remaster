@@ -5,7 +5,7 @@ export let colors = ["rgb(0,255,164)", "rgb(166,104,255)"];
 export const info = {
     firstName: "Devendra",
     lastName: "Dhare",
-    position: "a Full Stack Developer",
+    position: "a Full Stack Web Developer",
     selfPortrait: self, // don't change this unless you want to name your self-portrait in the "img" folder something else!
     gradient: `-webkit-linear-gradient(135deg, ${colors})`,
     // baseColor: colors[0],   
@@ -20,7 +20,7 @@ export const info = {
         },
         {
             emoji: "💼",
-            text: "Full Stack Web developer"
+            text: "MERN developer"
         },
         {
             emoji: "📧",

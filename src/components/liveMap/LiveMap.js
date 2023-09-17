@@ -134,7 +134,7 @@ export default function LiveMap({ web_socket: socket }) {
           setMarker_list(list_data);
         }
         // updateLocation();
-        document.getElementById('updateLocation').click();
+        // document.getElementById('updateLocation').click();
       });
     },
     [socket, JoinAs]
