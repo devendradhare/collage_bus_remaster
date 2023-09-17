@@ -52,6 +52,14 @@
     cursor: pointer;
 }
 
+#updateLocation{
+    background: lightseagreen;
+    position: absolute;
+    top: 50px;
+    z-index: 10;
+    right: 0;
+}
+
 /* .mapboxgl-popup {
     max-width: 100vh;
 } */

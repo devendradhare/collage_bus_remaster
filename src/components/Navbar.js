@@ -20,7 +20,11 @@ export default function Navbar() {
   const menu_icon_clicked = () => {
     setbx(bx !== "bx bx-menu" ? "bx bx-menu" : "bx bx-menu bx-x");
     setnavbar(navbar !== "navbar" ? "navbar" : "navbar navbar_active");
-    setClose_menu(Close_menu === "close_menu_not_active" ? "close_menu_active" : "close_menu_not_active");
+    setClose_menu(
+      Close_menu === "close_menu_not_active"
+        ? "close_menu_active"
+        : "close_menu_not_active"
+    );
   };
   return (
     <header>
@@ -41,6 +45,15 @@ export default function Navbar() {
           </li>
           <li
             onClick={() => {
+              Activate_on_click("live_map");
+            }}
+          >
+            <Link to="/live_map" className={Is_link_active["live_map"]}>
+              Map
+            </Link>
+          </li>
+          <li
+            onClick={() => {
               Activate_on_click("about");
             }}
           >
@@ -49,17 +62,7 @@ export default function Navbar() {
             </Link>
           </li>
 
-          <li
-            onClick={() => {
-              Activate_on_click("live_map");
-            }}
-          >
-            <Link to="/live_map" className={Is_link_active["live_map"]}>
-              Map
-            </Link>
-          </li>
-
-          <li
+          {/* <li
             onClick={() => {
               Activate_on_click("contact");
             }}
@@ -67,7 +70,7 @@ export default function Navbar() {
             <Link to="/" className={Is_link_active["contact"]}>
               Contect
             </Link>
-          </li>
+          </li> */}
         </ul>
       </div>
 
