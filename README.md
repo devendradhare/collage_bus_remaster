@@ -9,12 +9,16 @@ Certainly! Here's a concise project description for your College Bus Tracking We
 
 The College Bus Tracking Web App is a sophisticated real-time tracking system designed to enhance the safety and convenience of college bus transportation. This application allows users, including students and bus drivers, to effortlessly monitor the precise location of college buses and track the whereabouts of individual students.
 
+---
+
 **Key Features:**
 
 - Real-time tracking of college buses on an interactive map.
 - Secure authentication for both students and drivers.
 - Efficient communication via WebSocket (Socket.IO) for instant updates.
 - Integration with Mapbox API for mapping and geospatial data.
+
+---
 
 **Frontend Technologies:**
 
