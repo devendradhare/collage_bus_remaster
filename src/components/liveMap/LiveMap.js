@@ -2,7 +2,6 @@ import React, { useRef, useEffect, useState } from "react";
 import "./LiveMap.css";
 import mapboxgl from "!mapbox-gl"; // eslint-disable-line import/no-webpack-loader-syntax
 import "mapbox-gl/dist/mapbox-gl.css"; // Import Mapbox CSS
-// import { useAuth0 } from "@auth0/auth0-react";
 import routes from "./routes"; // Import bus route data
 import JoinAsPopup from "../JoinAsPopup.jsx";
 
@@ -83,47 +82,33 @@ export default function LiveMap({ web_socket: socket }) {
   );
 
   // when user will open map,
-  // figure out the user is a driver or a student ?
+  // figureing out the user is a driver or a student ?
   const setJoindAs = as => {
     console.log("getJoindAs runs", as);
     setJoinAs(as);
   };
 
-  // update user location
-  const updateLocation = () => {
-    navigator.geolocation.watchPosition(position => {
-      const { longitude, latitude } = position.coords;
-      // console.log(longitude, latitude);
-      socket.emit("user_coords", {
-        longitude,
-        latitude,
-        userid: socket.id,
-        joinAs: JoinAs
-      });
-    });
-  };
-
   // step-2 emiting live coordinates, socket.id and join as info on every 2s
-  // useEffect(
-  //   () => {
-  //     const interval = setInterval(() => {
-  //       navigator.geolocation.watchPosition(position => {
-  //         const { longitude, latitude } = position.coords;
-  //         // console.log(longitude, latitude);
-  //         socket.emit("user_coords", {
-  //           longitude,
-  //           latitude,
-  //           userid: socket.id,
-  //           joinAs: JoinAs
-  //         });
-  //       });
-  //     }, 2000);
-  //     return () => {
-  //       clearInterval(interval);
-  //     };
-  //   },
-  //   [socket, JoinAs]
-  // );
+  useEffect(
+    () => {
+      const interval = setInterval(() => {
+        navigator.geolocation.watchPosition(position => {
+          const { longitude, latitude } = position.coords;
+          // console.log(longitude, latitude);
+          socket.emit("user_coords", {
+            longitude,
+            latitude,
+            userid: socket.id,
+            joinAs: JoinAs
+          });
+        });
+      }, 2000);
+      return () => {
+        clearInterval(interval);
+      };
+    },
+    [socket, JoinAs]
+  );
 
   // step-3 getting new marker list from server
   useEffect(
@@ -133,8 +118,6 @@ export default function LiveMap({ web_socket: socket }) {
         if (JoinAs !== "") {
           setMarker_list(list_data);
         }
-        // updateLocation();
-        // document.getElementById('updateLocation').click();
       });
     },
     [socket, JoinAs]
@@ -167,9 +150,6 @@ export default function LiveMap({ web_socket: socket }) {
 
   return (
     <div>
-      <button id="updateLocation" onClick={updateLocation}>
-        update location
-      </button>
       {JoinAs === ""
         ? <JoinAsPopup socket={socket} setJoinAs={setJoindAs} />
         : ""}
