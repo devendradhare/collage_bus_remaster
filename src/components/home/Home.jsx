@@ -9,7 +9,7 @@ export default function Home() {
     <div className="home">
       <h1>Collage Bus Live</h1>
       <p>Track your collage bus live</p>
-      <Link to="/about">
+      <Link to="/live_map">
         <Fab variant="extended" size="medium" color="primary">
           <NavigationIcon sx={{ mr: 1 }} />
           Go to map
