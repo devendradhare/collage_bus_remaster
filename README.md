@@ -1,8 +1,5 @@
 # [collage_bus_remaster](https://inquisitive-narwhal-2ac7f8.netlify.app/)
 [click here](https://inquisitive-narwhal-2ac7f8.netlify.app/) to visit the Web-App
-
-Certainly! Here's a concise project description for your College Bus Tracking Web App:
-
 ---
 
 **Description:**
